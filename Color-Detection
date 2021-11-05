@@ -1,0 +1,75 @@
+import cv2  
+import numpy as np
+
+
+image = cv2.imread(r"test_image_14.png") #load your image
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) #convert the image into hsv
+
+#****************************************************************#
+
+green = np.uint8([[[0, 255, 0]]])  #green color
+hsvGreen = cv2.cvtColor(green, cv2.COLOR_BGR2HSV) #hsv value of green color 
+print(hsvGreen) 
+
+lowerLimit = hsvGreen[0][0][0] - 10, 100, 100  # range of green color lower limit and upper limit
+upperLimit = hsvGreen[0][0][0] + 10, 255, 255
+
+print(upperLimit)
+print(lowerLimit)
+lg = np.array(lowerLimit) #range of green color
+ug = np.array(upperLimit)
+
+green_mask = cv2.inRange(hsv, lg, ug) #green masked image
+cv2.imshow('green', green_mask) #show the image 
+
+#****************************************************************#
+
+
+blue = np.uint8([[[255, 0, 0]]])  #blue color
+hsvBlue = cv2.cvtColor(blue, cv2.COLOR_BGR2HSV) #hsv value of blue color 
+print(hsvBlue) 
+lowerLimit1 = hsvBlue[0][0][0] - 10, 100, 100  # range of blue color lower limit and upper limit
+upperLimit1 = hsvBlue[0][0][0] + 10, 255, 255
+
+print(lowerLimit1)
+print(upperLimit1)
+lb = np.array(lowerLimit1) #range of blue color
+ub = np.array(upperLimit1)
+
+blue_mask = cv2.inRange(hsv, lb, ub) #blue masked image
+cv2.imshow('blue', blue_mask)
+
+#****************************************************************#
+
+
+orange = np.uint8([[[0, 140, 255]]])  #Orange color
+hsvOrange = cv2.cvtColor(orange, cv2.COLOR_BGR2HSV) #hsv value of Orange color 
+print(hsvOrange) 
+lowerLimit2 = hsvOrange[0][0][0] - 10, 100, 100  # range of Orange color lower limit and upper limit
+upperLimit2 = hsvOrange[0][0][0] + 10, 255, 255
+print(lowerLimit2)
+print(upperLimit2)
+lo = np.array(lowerLimit2) #range of orange color
+uo = np.array(upperLimit2)
+
+orange_mask = cv2.inRange(hsv, lo, uo) #orange masked image
+cv2.imshow('orange', orange_mask)
+
+#****************************************************************#
+red = np.uint8([[[0, 0, 255]]]) #red color
+hsvred = cv2.cvtColor(red, cv2.COLOR_BGR2HSV) #hsv value of red color
+print(hsvred)
+
+lower = hsvred[0][0][0] - 10, 100, 100 # range of red color lower limit and upper limit
+upper = hsvred[0][0][0] + 10, 255, 255
+
+print(upper)
+print(lower)
+lr = np.array(lower) #range of red color
+ur = np.array(upper)
+
+red_mask = cv2.inRange(hsv, lr, ur) #red masked image
+cv2.imshow('red', red_mask)  #show the image 
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
